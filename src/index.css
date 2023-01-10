@@ -1,0 +1,222 @@
+@font-face {
+  font-family: "Dela Gothic";
+  src: local("Dela Gothic"),
+    url("./fonts/Dela_Gothic_One/DelaGothicOne-Regular.ttf")
+}
+
+@font-face {
+  font-family: "chunk-master";
+  src: url("./fonts/chunk-master/Chunk.otf");
+}
+
+@font-face {
+  font-family: "pricedown";
+  src: url(./fonts/pricedown/pricedown\ bl.otf);
+}
+
+/* Globals */
+
+/*{text-align: center;
+font-family: Helvetica}*/
+
+h1 {
+  font-family: "Dela Gothic";
+  font-size: 50px !important;
+}
+
+h2 {
+  font-family: "Dela Gothic";
+  margin: 20px !important;
+}
+
+button {
+  cursor: pointer;
+  margin: 10px;
+  align-self: center;
+}
+
+
+button {
+  background: #6A53CE;
+  border-radius: 999px !important;
+  box-shadow: #6A53CE 0 10px 20px -10px;
+  box-sizing: border-box !important;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif !important;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px !important;
+  margin: 2px !important;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+}
+
+input {
+  border: none;
+  border-bottom: solid;
+  border-color: lightgray;
+  border-width: 2px;
+  border-radius: 2%;
+}
+
+input:focus {
+  outline: none;
+  background: rgba(106, 83, 206, 0.25);
+}
+
+.navBar {
+  background: rgba(106, 83, 206);
+  color: white;
+}
+
+.navBar * {
+  margin: 5px;
+}
+
+.navBar .logo {
+  font-family: "Dela Gothic";
+
+}
+
+
+
+
+
+
+
+/* Main Page */
+
+.mainPage {
+  text-align: center;
+}
+
+
+.balance {
+  font-size: 20px;
+  font-family: "Dela Gothic";
+  word-spacing: 2px;
+  border: solid;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 33px;
+  padding-bottom: 47px;
+  vertical-align: middle;
+
+}
+
+
+.settings {
+  position: relative;
+  color: white;
+  text-align: left;
+  font-family: "chunk-master";
+
+}
+
+.settings input:focus {
+  background: white;
+}
+
+table { 
+  text-align: center !important;
+  padding-top: 10px !important;
+  margin: 0 auto !important;
+
+
+}
+
+th {
+  font-family: "Dela Gothic";
+  padding: 10px;
+  background-color: rgb(241, 236, 236);
+
+}
+
+td {
+  font-style: normal;
+  font-weight: normal;
+  padding-left: 10px;
+}
+
+
+.table-striped {
+  width: 70% !important;
+  font-family: "chunk-master"
+}
+
+.table-striped button {
+  background: none;
+  box-shadow: none;
+  color: rgba(106, 83, 206);
+}
+
+.forecast {
+  width: 70%;
+  margin-left: 15%;
+}
+
+/* Login page */
+.loginPage {
+  margin: 50px;
+
+}
+
+.loginPage * {
+  margin: 5px;
+}
+
+
+
+
+/* SignUp */
+.signupPage {
+  margin: 25px;
+  width: 40%;
+}
+
+.signupPage * {
+  margin: 10px;
+  padding: 0px;
+
+}
+
+.signupPage h2 {
+  margin: 0 auto;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.signupPage input {
+  width: 70%;
+  height: 40px;
+  font-family: "Dela Gothic";
+
+}
+
+
+.signupPage button {
+  margin-right: 100%;
+}
+
+.allowanceSetUp {
+  padding: 30px;
+  margin: 50px;
+  width: 40%;
+  border: solid;
+  background-color: rgba(106, 83, 206, 0.25);
+  border-color: rgba(106, 83, 206, 0.75);
+  border-radius: 5%;
+
+}
+
