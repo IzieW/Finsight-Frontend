@@ -1,13 +1,9 @@
-const Notification = ({notification}) => {
+const Notification = ({ notification }) => {
+  return (
+    <div style={{ color: "red" }}>
+      {!notification ? null : `* ${notification}`}
+    </div>
+  );
+};
 
-    return(
-        <div style={{color:"red"}}>
-        {!notification?
-            null :
-            `* ${notification}`
-        }
-        </div>
-    )
-}
-
-export default Notification
+export default Notification;

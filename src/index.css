@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Dela Gothic";
   src: local("Dela Gothic"),
-    url("./fonts/Dela_Gothic_One/DelaGothicOne-Regular.ttf")
+    url("./fonts/Dela_Gothic_One/DelaGothicOne-Regular.ttf");
 }
 
 @font-face {
@@ -35,15 +35,17 @@ button {
   align-self: center;
 }
 
-
 button {
-  background: #6A53CE;
+  background: #6a53ce;
   border-radius: 999px !important;
-  box-shadow: #6A53CE 0 10px 20px -10px;
+  box-shadow: #6a53ce 0 10px 20px -10px;
   box-sizing: border-box !important;
-  color: #FFFFFF;
+  color: #ffffff;
   cursor: pointer;
-  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif !important;
+  font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji",
+    NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji",
+    EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", sans-serif !important;
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
@@ -83,21 +85,13 @@ input:focus {
 
 .navBar .logo {
   font-family: "Dela Gothic";
-
 }
-
-
-
-
-
-
 
 /* Main Page */
 
 .mainPage {
   text-align: center;
 }
-
 
 .balance {
   font-size: 20px;
@@ -112,35 +106,29 @@ input:focus {
   padding-top: 33px;
   padding-bottom: 47px;
   vertical-align: middle;
-
 }
-
 
 .settings {
   position: relative;
   color: white;
   text-align: left;
   font-family: "chunk-master";
-
 }
 
 .settings input:focus {
   background: white;
 }
 
-table { 
+table {
   text-align: center !important;
   padding-top: 10px !important;
   margin: 0 auto !important;
-
-
 }
 
 th {
   font-family: "Dela Gothic";
   padding: 10px;
   background-color: rgb(241, 236, 236);
-
 }
 
 td {
@@ -149,10 +137,9 @@ td {
   padding-left: 10px;
 }
 
-
 .table-striped {
   width: 70% !important;
-  font-family: "chunk-master"
+  font-family: "chunk-master";
 }
 
 .table-striped button {
@@ -169,15 +156,11 @@ td {
 /* Login page */
 .loginPage {
   margin: 50px;
-
 }
 
 .loginPage * {
   margin: 5px;
 }
-
-
-
 
 /* SignUp */
 .signupPage {
@@ -188,7 +171,6 @@ td {
 .signupPage * {
   margin: 10px;
   padding: 0px;
-
 }
 
 .signupPage h2 {
@@ -201,9 +183,7 @@ td {
   width: 70%;
   height: 40px;
   font-family: "Dela Gothic";
-
 }
-
 
 .signupPage button {
   margin-right: 100%;
@@ -217,6 +197,4 @@ td {
   background-color: rgba(106, 83, 206, 0.25);
   border-color: rgba(106, 83, 206, 0.75);
   border-radius: 5%;
-
 }
-
