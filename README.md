@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# FinSight: Short-sighed, gamified money management app
+
+Front end configuration. 
+
+[Link](https://finsight.herokuapp.com/) to cite hosted on Heroku. 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
