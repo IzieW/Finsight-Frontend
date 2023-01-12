@@ -21,6 +21,7 @@ import TransactionForm from "./components/TransactionForm";
 import Login from "./components/Login";
 import Forecast from "./components/Forecast";
 import SignUp from "./components/SignUp";
+import AllowanceSetUp from "./components/AllowanceSetUp";
 import Notification from "./components/Notification";
 import NavigationBar from "./components/Navbar";
 
@@ -33,6 +34,7 @@ const App = () => {
   const [password, setPassword] = useState("");
 
   const [newTransaction, setNewTransaction] = useState(false);
+
 
   const [balance, setBalance] = useState(null);
   const [amount, setAmount] = useState("");
@@ -55,7 +57,8 @@ const App = () => {
       setUsername("");
       setPassword("");
     } catch (exception) {
-      setTimeout(setNotification("Username or password incorrect"), 500);
+      setNotification("Username or password incorrect")
+      setTimeout(()=> setNotification(false), 5000)
       setUsername("");
       setPassword("");
     }
@@ -158,14 +161,17 @@ const App = () => {
 
   return (
     <Router>
-      <NavigationBar user={user} setForecasts={setForecasts}/>
+      <NavigationBar user={user} setUser={setUser} setForecasts={setForecasts}/>
       <Routes>
         <Route path="/signup" element={<SignUp />} />
         <Route
           path="/"
           element={
             user ? (
-              <div className="mainPage">
+              <div className="mainPage" >
+                {user.allowance===null
+                ? <AllowanceSetUp user={user} setUser = {setUser}/>
+                :null }
                 <Balance amount={balance} />
                 <div className="forecast">
                  {forecasts ?<Forecast info={forecasts} className="forecast" />: null}

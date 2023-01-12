@@ -64,7 +64,7 @@ button {
 input {
   border: none;
   border-bottom: solid;
-  border-color: lightgray;
+  border-color: lightgray !important;
   border-width: 2px;
   border-radius: 2%;
 }
@@ -88,6 +88,35 @@ input:focus {
 }
 
 /* Main Page */
+
+.allowanceSetUp {
+  background: white;
+  margin: 5%;
+  margin-top: 1%;
+  padding-top: 10%;
+  padding-bottom: 200px;
+  box-shadow:rgba(106, 83, 206) 5px 10px 20px -10px;
+  position: absolute;
+}
+
+.allowanceSetUp input {
+  height: 50px;
+  font-size: 30px;
+  margin: 10px;
+  width: 20%;
+}
+
+
+ .guide {
+  padding: 30px;
+  width: 40%;
+  margin: 50px;
+  margin-left: 10px;
+  border: solid;
+  background-color: rgba(106, 83, 206, 0.25);
+  border-color: rgba(106, 83, 206, 0.75);
+  border-radius: 5%;
+}
 
 .mainPage {
   text-align: center;
@@ -189,12 +218,4 @@ td {
   margin-right: 100%;
 }
 
-.allowanceSetUp {
-  padding: 30px;
-  margin: 50px;
-  width: 40%;
-  border: solid;
-  background-color: rgba(106, 83, 206, 0.25);
-  border-color: rgba(106, 83, 206, 0.75);
-  border-radius: 5%;
-}
+

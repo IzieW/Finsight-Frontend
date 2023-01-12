@@ -5,7 +5,7 @@ import { BsGear } from "react-icons/bs";
 
 import SettingsMenu from "./SettingsMenu";
 
-const Settings = ({ user, setForecasts }) => {
+const Settings = ({ user, setUser, setForecasts}) => {
   const [open, setOpen] = useState(false);
   const [editAllowance, setEditAllowance] = useState(false);
 
@@ -23,6 +23,7 @@ const Settings = ({ user, setForecasts }) => {
         <div>
           <SettingsMenu
             user={user}
+            setUser={setUser}
             editAllowance={editAllowance}
             setEditAllowance={setEditAllowance}
             setForecasts={setForecasts}
