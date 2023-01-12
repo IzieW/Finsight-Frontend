@@ -5,7 +5,7 @@ import { BsGear } from "react-icons/bs";
 
 import SettingsMenu from "./SettingsMenu";
 
-const Settings = ({ user }) => {
+const Settings = ({ user, setForecasts }) => {
   const [open, setOpen] = useState(false);
   const [editAllowance, setEditAllowance] = useState(false);
 
@@ -25,6 +25,7 @@ const Settings = ({ user }) => {
             user={user}
             editAllowance={editAllowance}
             setEditAllowance={setEditAllowance}
+            setForecasts={setForecasts}
           />
         </div>
       </Collapse>

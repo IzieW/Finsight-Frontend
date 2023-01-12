@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import userService from "../services/users";
+import makeForecast from "../utils/forecasting";
 import { BsFillPencilFill, BsCheck2 } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
 
-const SettingsMenu = ({ user, editAllowance, setEditAllowance }) => {
+const SettingsMenu = ({ user, editAllowance, setEditAllowance, setForecasts}) => {
   const [newAllowance, setNewAllowance] = useState(user.allowance);
 
   const handleAllowanceChange = (event) => {
@@ -24,6 +25,7 @@ const SettingsMenu = ({ user, editAllowance, setEditAllowance }) => {
     userService.update(user.id, newValue).then((response) => {
       setEditAllowance(false);
       user.allowance = newAllowance;
+      makeForecast(user.balance, newAllowance, setForecasts)
     });
   };
 

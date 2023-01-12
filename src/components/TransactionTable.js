@@ -27,7 +27,7 @@ const TransactionTable = ({ transactions, handleDelete }) => {
     return <p>Click buttons above to add income or expenses</p>;
   }
   return (
-    <table class="table table-striped">
+    <table className="table table-striped">
       <thead>
         <tr>
           <th></th>

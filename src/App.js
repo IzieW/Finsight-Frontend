@@ -1,22 +1,23 @@
 import { useState, useEffect } from "react";
+
 import userService from "./services/users";
 import transactionService from "./services/transactions.js";
 import loginService from "./services/login";
 
 import "./index.css";
 
+import makeForecast from "./utils/forecasting";
+
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
   Navigate,
 } from "react-router-dom";
 
 import TransactionTable from "./components/TransactionTable";
 import Balance from "./components/Balance";
 import TransactionForm from "./components/TransactionForm";
-import Settings from "./components/SettingsDropDown";
 import Login from "./components/Login";
 import Forecast from "./components/Forecast";
 import SignUp from "./components/SignUp";
@@ -51,7 +52,6 @@ const App = () => {
       window.localStorage.setItem("loggedUser", JSON.stringify(userDetails));
       transactionService.setToken(userDetails.token);
       setUser(userDetails);
-      setForecasts(getWeek());
       setUsername("");
       setPassword("");
     } catch (exception) {
@@ -71,7 +71,6 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
-      setForecasts(getWeek());
       transactionService.setToken(user.token);
     }
   }, []);
@@ -82,47 +81,10 @@ const App = () => {
         setTransactions(sortTransactions(response.transactions));
         setUser(response);
         setBalance(response.balance);
-        fillForecast(response.balance, response.allowance);
-      });
-      setForecasts(forecasts);
+        makeForecast(response.balance, response.allowance, setForecasts);
+      });;
     }
   }, [user]);
-
-  const getWeek = () => {
-    const days = ["Sun", "Mon", "Tue", "Wedn", "Thurs", "Fri", "Sat"];
-
-    const today = Number(new Date().getDay());
-    const shell = [];
-
-    shell[0] = {
-      label: "today",
-    };
-
-    for (let i = 1; i < 7; i++) {
-      let index = (today + i) % 7;
-      shell[i] = {
-        label: days[index],
-      };
-    }
-
-    return shell;
-  };
-
-  const getForecast = (balance, allowance) => {
-    const predictions = [1, 2, 3, 4, 5, 6].map((a) => balance + a * allowance);
-    const starter = [balance];
-    const forecast = starter.concat(predictions);
-    return forecast;
-  };
-
-  const fillForecast = (balance, allowance) => {
-    if (forecasts) {
-      const predictions = getForecast(balance, allowance);
-      for (let i = 0; i < 7; i++) {
-        forecasts[i]["value"] = predictions[i];
-      }
-    }
-  };
 
   const handleAmountChange = (event) => {
     event.preventDefault();
@@ -134,7 +96,6 @@ const App = () => {
     let newAmount = Number(amount);
 
     if (newTransaction === "expense") {
-      console.log(true);
       newAmount = amount * -1;
     }
 
@@ -151,8 +112,7 @@ const App = () => {
       setTransactions(sortTransactions(newTransactions.concat(transactions)));
 
       setBalance(newBalance);
-      fillForecast(newBalance, user.allowance);
-      setForecasts(forecasts);
+      makeForecast(newBalance, user.allowance, setForecasts);
       setNewTransaction(false);
       setAmount("");
       setReference("");
@@ -188,19 +148,17 @@ const App = () => {
     transactionService
       .deleteTransaction(event.target.value)
       .then((response) => {
-        console.log(transactionToDelete.amount);
         setTransactions(
           transactions.filter((n) => n.id !== event.target.value)
         );
         setBalance(newBalance);
-        fillForecast(newBalance, user.allowance);
-        setForecasts(forecasts);
+        makeForecast(newBalance, user.allowance, setForecasts);
       });
   };
 
   return (
     <Router>
-      <NavigationBar user={user} />
+      <NavigationBar user={user} setForecasts={setForecasts}/>
       <Routes>
         <Route path="/signup" element={<SignUp />} />
         <Route
@@ -210,7 +168,7 @@ const App = () => {
               <div className="mainPage">
                 <Balance amount={balance} />
                 <div className="forecast">
-                  <Forecast info={forecasts} className="forecast" />
+                 {forecasts ?<Forecast info={forecasts} className="forecast" />: null}
                 </div>
                 <div>
                   <button onClick={newIncomeButton}>+</button>

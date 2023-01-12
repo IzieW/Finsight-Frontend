@@ -11,7 +11,6 @@ import {
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 import { Bar } from "react-chartjs-2";
-import { BsGraphDown, BsTextCenter } from "react-icons/bs";
 
 ChartJS.register(
   CategoryScale,
@@ -67,13 +66,13 @@ const Forecast = ({ info }) => {
   };
 
   const newData = {
-    labels: info.map((i) => i.label),
+    labels: info.labels,
     datasets: [
       {
         label: "",
-        data: info.map((i) => i.value),
-        backgroundColor: info.map((i) => {
-          if (i.value > 0) {
+        data: info.values,
+        backgroundColor: info.values.map((i) => {
+          if (i > 0) {
             return "rgb(138, 160, 84, 0.75)";
           }
           return "rgb(220, 24, 93, 0.75)";
