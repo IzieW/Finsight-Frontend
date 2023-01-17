@@ -1,6 +1,7 @@
 import { useState } from "react";
 import userService from "../services/users";
 import { Link } from "react-router-dom";
+import Notification from "./Notification"
 
 
 const UserDetails = ({
@@ -11,42 +12,46 @@ const UserDetails = ({
   password,
   setPassword,
   handleNext,
-}) => (
-  <div className="signupPage">
-    <h2> Sign up</h2>
-    <form onSubmit={handleNext}>
-      <div>
-        <input
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-          placeholder="Username"
-          required
-        />
+  notification
+}) => {
+
+  return (
+      <div className="signupPage">
+        <h2> Sign up</h2>
+        <Notification notification = {notification} />
+        <form onSubmit={handleNext}>
+          <div>
+            <input
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              placeholder="Username"
+              required
+            />
+          </div>
+          <div>
+            <input
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              placeholder="Name"
+              required
+            />
+          </div>
+          <div>
+            <input
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              type="password"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <button type="submit">sign up</button>
+        </form>
+        <div>
+          Already have an account? <Link to="/login">login</Link>
+        </div>
       </div>
-      <div>
-        <input
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          placeholder="Name"
-          required
-        />
-      </div>
-      <div>
-        <input
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          type="password"
-          placeholder="Password"
-          required
-        />
-      </div>
-      <button type="submit">next</button>
-    </form>
-    <div>
-      Already have an account? <Link to="/login">login</Link>
-    </div>
-  </div>
-);
+)};
 
 
 const PostSignup = () => {
@@ -64,6 +69,8 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [notification, setNotification] = useState(false)
+
 
   const [signupComplete, setSignupComplete] = useState(false);
 
@@ -83,6 +90,12 @@ const SignUp = () => {
     userService.create(newUser).then((response) => {
       console.log("sucess!");
       setSignupComplete(true);
+    }).catch(error => {
+      setNotification(error.response.data.error)
+      setTimeout(() => setNotification(false), 5000)
+      setUsername("")
+      setName("")
+      setPassword("")
     });
   };
 
@@ -101,6 +114,7 @@ const SignUp = () => {
           password={password}
           setPassword={setPassword}
           handleNext={handleSignUp}
+          notification={notification}
         />
       ) : (
         <PostSignup username={username} password={password} />
@@ -109,4 +123,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export  { SignUp, PostSignup }

@@ -1,9 +1,11 @@
 import changeAllowance from "../utils/changeAllowance"
 import transactionService from "../services/transactions"
 import {useState} from "react"
+import Notification from "./Notification";
 
 const AllowanceSetUp = ({user, setUser}) => {
     const [allowance, setAllowance] = useState("")
+    const [notification, setNotification] = useState(false)
 
     const updateAllowance = async (event) => {
         event.preventDefault()
@@ -23,11 +25,15 @@ const AllowanceSetUp = ({user, setUser}) => {
                 window.location.reload();
 
             })
+            .catch(error=> 
+              setNotification("Balance must be greater than zero"))
+              setTimeout(()=> setNotification(null), 5000)
     }
 
     return (<div className="allowanceSetUp">
       <div style={{ float: "left" }}>
         <h2>Set your daily budget</h2>
+        <Notification notification={notification}/>
         How much do you want to spend a day?
         <form onSubmit={updateAllowance}>
           £
@@ -37,6 +43,7 @@ const AllowanceSetUp = ({user, setUser}) => {
             placeholder="10"
             type="number"
             min="0"
+            required
           />
           <div style={{ fontSize: "2" }}>*You can change this later</div>
           <button type="submit">save</button>

@@ -1,16 +1,23 @@
 import { Link } from "react-router-dom";
+import {useState} from "react"
 
 const Login = ({
-  username,
-  setUsername,
-  password,
-  setPassword,
-  handleLogin,
+  handleLogin
 }) => {
+const [username, setUsername] = useState("")
+const [password, setPassword] = useState("")
+
+const doLogin = async (event) => {
+  event.preventDefault()
+  await handleLogin(username, password)
+
+  setUsername("")
+  setPassword("")
+}
   return (
     <div className="loginPage">
       <h2> Sign in </h2>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={doLogin}>
         <div>
           <input
             value={username}

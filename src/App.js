@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+
 import userService from "./services/users";
 import transactionService from "./services/transactions.js";
 import loginService from "./services/login";
@@ -20,7 +21,7 @@ import Balance from "./components/Balance";
 import TransactionForm from "./components/TransactionForm";
 import Login from "./components/Login";
 import Forecast from "./components/Forecast";
-import SignUp from "./components/SignUp";
+import {SignUp} from "./components/SignUp";
 import AllowanceSetUp from "./components/AllowanceSetUp";
 import Notification from "./components/Notification";
 import NavigationBar from "./components/Navbar";
@@ -29,9 +30,6 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [forecasts, setForecasts] = useState(null);
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
 
   const [newTransaction, setNewTransaction] = useState(false);
 
@@ -42,9 +40,7 @@ const App = () => {
 
   const [notification, setNotification] = useState(false);
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-
+  const handleLogin = async (username, password) => {
     try {
       const userDetails = await loginService.login({
         username,
@@ -54,13 +50,9 @@ const App = () => {
       window.localStorage.setItem("loggedUser", JSON.stringify(userDetails));
       transactionService.setToken(userDetails.token);
       setUser(userDetails);
-      setUsername("");
-      setPassword("");
     } catch (exception) {
       setNotification("Username or password incorrect")
       setTimeout(()=> setNotification(false), 5000)
-      setUsername("");
-      setPassword("");
     }
   };
 
@@ -211,10 +203,6 @@ const App = () => {
               <div>
                 <Notification notification={notification} />
                 <Login
-                  username={username}
-                  setUsername={setUsername}
-                  password={password}
-                  setPassword={setPassword}
                   handleLogin={handleLogin}
                 />
               </div>
