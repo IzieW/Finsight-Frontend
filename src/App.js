@@ -33,7 +33,6 @@ const App = () => {
 
   const [newTransaction, setNewTransaction] = useState(false);
 
-
   const [balance, setBalance] = useState(null);
   const [amount, setAmount] = useState("");
   const [reference, setReference] = useState("");
@@ -153,17 +152,14 @@ const App = () => {
 
   return (
     <Router>
-      <NavigationBar user={user} setUser={setUser} setForecasts={setForecasts}/>
+      <NavigationBar user={user} setForecasts={setForecasts}/>
       <Routes>
         <Route path="/signup" element={<SignUp />} />
         <Route
           path="/"
           element={
             user ? (
-              <div className="mainPage" >
-                {user.allowance===null
-                ? <AllowanceSetUp user={user} setUser = {setUser}/>
-                :null }
+              <div className="mainPage">
                 <Balance amount={balance} />
                 <div className="forecast">
                  {forecasts ?<Forecast info={forecasts} className="forecast" />: null}

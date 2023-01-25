@@ -3,7 +3,13 @@ import userService from "../services/users";
 import { Link } from "react-router-dom";
 import Notification from "./Notification"
 
-
+const Notification = (notification) => {
+  return (
+    <div style={{ color: "red" }}>
+      {!notification ? null : `* ${notification}`}
+    </div>
+  );
+};
 const UserDetails = ({
   username,
   setUsername,
@@ -53,8 +59,32 @@ const UserDetails = ({
       </div>
 )};
 
+const AllowanceSetUp = ({ allowance, setAllowance, handleSignUp }) => (
+  <div>
+    <div className="signupPage" style={{ float: "left" }}>
+      <h2>Daily Budget</h2>
+      How much do you want to spend a day?
+      <form onSubmit={handleSignUp}>
+        £
+        <input
+          value={allowance}
+          onChange={({ target }) => setAllowance(target.value)}
+          placeholder="10"
+          type="number"
+        />
+        <div style={{ fontSize: "2" }}>*You can change this later</div>
+        <button type="submit">save</button>
+      </form>
+    </div>
+    <div className="allowanceSetUp" style={{ float: "left" }}>
+      Each day you'll be given this amount to spend. If you spend too much, it's
+      taken out of tomorrow's budget. If you don't spend it all, what is left
+      rolls over!
+    </div>
+  </div>
+);
 
-const PostSignup = () => {
+const PostSignup = ({ username, password }) => {
   return (
     <div className="signupPage">
       <h2>Success!</h2>
@@ -72,8 +102,17 @@ const SignUp = () => {
   const [notification, setNotification] = useState(false)
 
 
+  const [detailsComplete, setDetailsComplete] = useState(false);
+  const [notification, setnotification] = useState(false);
+  const [allowance, setAllowance] = useState(10);
+
   const [signupComplete, setSignupComplete] = useState(false);
 
+  const handleNext = (event) => {
+    event.preventDefault();
+
+    setDetailsComplete(true);
+  };
 
   const handleSignUp = (event) => {
     event.preventDefault();
@@ -82,7 +121,7 @@ const SignUp = () => {
       username,
       name,
       password,
-      allowance: null
+      allowance,
     };
 
     console.log(newUser);
@@ -105,7 +144,7 @@ const SignUp = () => {
 
   return (
     <div>
-      {!signupComplete ? (
+      {!detailsComplete ? (
         <UserDetails
           username={username}
           setUsername={setUsername}
@@ -113,11 +152,19 @@ const SignUp = () => {
           setName={setName}
           password={password}
           setPassword={setPassword}
+<<<<<<< HEAD
           handleNext={handleSignUp}
           notification={notification}
+=======
+          handleNext={handleNext}
+>>>>>>> parent of e73615f (balance set after login)
         />
       ) : (
-        <PostSignup username={username} password={password} />
+        <AllowanceSetUp
+          allowance={allowance}
+          setAllowance={setAllowance}
+          handleSignUp={handleSignUp}
+        />
       )}
     </div>
   );

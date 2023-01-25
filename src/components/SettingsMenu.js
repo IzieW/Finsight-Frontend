@@ -1,28 +1,32 @@
 import React, { useState } from "react";
-import changeAllowance from "../utils/changeAllowance"
+import userService from "../services/users";
+import makeForecast from "../utils/forecasting";
 import { BsFillPencilFill, BsCheck2 } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
-import makeForecast from "../utils/forecasting";
 
-
-const SettingsMenu = ({ user, setUser, editAllowance, setEditAllowance, setForecasts}) => {
+const SettingsMenu = ({ user, editAllowance, setEditAllowance, setForecasts}) => {
   const [newAllowance, setNewAllowance] = useState(user.allowance);
 
   const handleAllowanceChange = (event) => {
     setNewAllowance(event.target.value);
   };
 
-  const updateAllowance = async (event) => {
+  const changeAllowance = (event) => {
     event.preventDefault();
     if (newAllowance === user.allowance) {
       setEditAllowance(false);
       return null;
     }
-      changeAllowance(user, newAllowance)
+
+    console.log("changing allowance");
+    const newValue = {
+      allowance: Number(newAllowance),
+    };
+    userService.update(user.id, newValue).then((response) => {
+      setEditAllowance(false);
+      user.allowance = newAllowance;
       makeForecast(user.balance, newAllowance, setForecasts)
-      user.allowance = newAllowance
-      setEditAllowance(false)
-      setUser(user)
+    });
   };
 
   const logout = () => {
@@ -31,7 +35,7 @@ const SettingsMenu = ({ user, setUser, editAllowance, setEditAllowance, setForec
   };
 
   const allowanceForm = () => (
-    <form onSubmit={updateAllowance}>
+    <form onSubmit={changeAllowance}>
       <input
         value={newAllowance}
         onChange={handleAllowanceChange}
