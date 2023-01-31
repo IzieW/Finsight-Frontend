@@ -105,4 +105,4 @@ const SignUp = ({ handleLogin }) => {
   )
 }
 
-export { SignUp }
+export default SignUp

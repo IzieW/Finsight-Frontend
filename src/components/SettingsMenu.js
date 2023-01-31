@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
-import userService from '../services/users'
-import makeForecast from '../utils/forecasting'
-import { BsFillPencilFill, BsCheck2 } from 'react-icons/bs'
-import { BiLogOut } from 'react-icons/bi'
+import LogoutButton from './LogoutButton'
+import AllowanceForm from './AllowanceForm'
+import { BsFillPencilFill} from 'react-icons/bs'
 
 const SettingsMenu = ({
   user,
@@ -10,70 +8,24 @@ const SettingsMenu = ({
   setEditAllowance,
   setForecasts,
 }) => {
-  const [newAllowance, setNewAllowance] = useState(user.allowance)
-
-  const handleAllowanceChange = (event) => {
-    setNewAllowance(event.target.value)
-  }
-
-  const changeAllowance = (event) => {
-    event.preventDefault()
-    if (newAllowance === user.allowance) {
-      setEditAllowance(false)
-      return null
-    }
-
-    console.log('changing allowance')
-    const newValue = {
-      allowance: Number(newAllowance),
-    }
-    userService.update(user.id, newValue).then(() => {
-      setEditAllowance(false)
-      user.allowance = newAllowance
-      makeForecast(user.balance, newAllowance, setForecasts)
-    })
-  }
-
-  const logout = () => {
-    window.localStorage.removeItem('loggedUser')
-    window.location.reload()
-  }
-
-  const allowanceForm = () => (
-    <form onSubmit={changeAllowance}>
-      <input
-        value={newAllowance}
-        onChange={handleAllowanceChange}
-        type="number"
-        min="0"
-      />{' '}
-      <button type="submit">
-        <BsCheck2 />
-      </button>
-    </form>
-  )
 
   return (
     <div className="settings">
       <div>{user.name}</div>
-      <div>
+      <div style={{display: 'flex', alignItems:'center'}}>
         Daily Budget: £
-        {editAllowance ? (
-          allowanceForm()
-        ) : (
-          <>
-            {' '}
-            {user.allowance}
+        {editAllowance ? (<div>
+          <AllowanceForm user={user} editAllowance={editAllowance} setEditAllowance={setEditAllowance} setForecasts={setForecasts}/>
+        </div>)
+          :( <div> {user.allowance}
             <BsFillPencilFill
               style={{ fontSize: '10px', marginLeft: '5px' }}
               onClick={() => setEditAllowance(true)}
             />
-          </>
-        )}
+          </div>)
+        }
       </div>
-      <div onClick={logout} style={{ cursor: 'pointer' }}>
-        logOut <BiLogOut />
-      </div>
+      <LogoutButton />
     </div>
   )
 }

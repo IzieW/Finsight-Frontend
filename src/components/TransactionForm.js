@@ -1,13 +1,19 @@
+import {useState} from 'react'
+
 const TransactionForm = ({
   transactionType,
-  reference,
-  setReference,
-  amount,
-  handleAmount,
-  addTransaction,
+  addTransaction
 }) => {
+  const [amount, setAmount] = useState('')
+  const [reference, setReference] = useState('')
+
+  const saveTransaction = (event) => {
+    event.preventDefault()
+    addTransaction(amount, reference)
+  }
+
   return (
-    <form onSubmit={addTransaction}>
+    <form onSubmit={saveTransaction}>
       <p style={{ color: transactionType === 'income' ? 'green' : 'red' }}>
         New {transactionType === 'income' ? 'Income' : 'Expense'}
       </p>
@@ -18,7 +24,7 @@ const TransactionForm = ({
       />
       <input
         value={amount}
-        onChange={handleAmount}
+        onChange={({target}) => setAmount(target.value)}
         type="number"
         placeholder={transactionType === 'income' ? 'amount' : 'cost'}
         required

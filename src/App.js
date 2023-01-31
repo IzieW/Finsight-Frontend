@@ -7,6 +7,7 @@ import loginService from './services/login'
 import './index.css'
 
 import makeForecast from './utils/forecasting'
+import helper from './utils/helper'
 
 import {
   BrowserRouter as Router,
@@ -20,7 +21,7 @@ import Balance from './components/Balance'
 import TransactionForm from './components/TransactionForm'
 import Login from './components/Login'
 import Forecast from './components/Forecast'
-import { SignUp } from './components/SignUp'
+import SignUp from './components/SignUp'
 import Notification from './components/Notification'
 import NavigationBar from './components/Navbar'
 
@@ -32,8 +33,6 @@ const App = () => {
   const [newTransaction, setNewTransaction] = useState(false)
 
   const [balance, setBalance] = useState(null)
-  const [amount, setAmount] = useState('')
-  const [reference, setReference] = useState('')
 
   const [notification, setNotification] = useState(false)
 
@@ -53,11 +52,6 @@ const App = () => {
     }
   }
 
-  const sortTransactions = (arr) => {
-    arr.sort((a, b) => new Date(b.date) - new Date(a.date))
-    return arr
-  }
-
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser')
     if (loggedUserJSON) {
@@ -70,7 +64,7 @@ const App = () => {
   useEffect(() => {
     if (user && !user.name) {
       userService.getOne(user.id).then((response) => {
-        setTransactions(sortTransactions(response.transactions))
+        setTransactions(helper.sortTransactions(response.transactions))
         setUser(response)
         setBalance(response.balance)
         makeForecast(response.balance, response.allowance, setForecasts)
@@ -78,13 +72,8 @@ const App = () => {
     }
   }, [user])
 
-  const handleAmountChange = (event) => {
-    event.preventDefault()
-    setAmount(event.target.value)
-  }
 
-  const addTransaction = (event) => {
-    event.preventDefault()
+  const addTransaction = (amount, reference) => {
     let newAmount = Number(amount)
 
     if (newTransaction === 'expense') {
@@ -101,13 +90,11 @@ const App = () => {
     transactionService.create(transaction).then((response) => {
       const newTransactions = [response.data]
 
-      setTransactions(sortTransactions(newTransactions.concat(transactions)))
+      setTransactions(helper.sortTransactions(newTransactions.concat(transactions)))
 
       setBalance(newBalance)
       makeForecast(newBalance, user.allowance, setForecasts)
       setNewTransaction(false)
-      setAmount('')
-      setReference('')
     })
   }
 
@@ -171,10 +158,6 @@ const App = () => {
                   {newTransaction ? (
                     <TransactionForm
                       transactionType={newTransaction}
-                      reference={reference}
-                      setReference={setReference}
-                      amount={amount}
-                      handleAmount={handleAmountChange}
                       addTransaction={addTransaction}
                     />
                   ) : null}
