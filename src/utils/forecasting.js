@@ -6,7 +6,6 @@ const getWeek = () => {
 
   arr[0] = 'today'
 
-
   for (let i = 1; i < 7; i++) {
     let index = (today + i) % 7
     arr[i] = days[index]
@@ -25,7 +24,7 @@ const predictForecast = (balance, allowance) => {
 const makeForecast = (balance, allowance, setForecasts) => {
   const forecast = {
     labels: getWeek(),
-    values: predictForecast(balance, allowance)
+    values: predictForecast(balance, allowance),
   }
 
   setForecasts(forecast)

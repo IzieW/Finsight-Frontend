@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 
-
 import userService from './services/users'
 import transactionService from './services/transactions.js'
 import loginService from './services/login'
@@ -21,7 +20,7 @@ import Balance from './components/Balance'
 import TransactionForm from './components/TransactionForm'
 import Login from './components/Login'
 import Forecast from './components/Forecast'
-import {SignUp} from './components/SignUp'
+import { SignUp } from './components/SignUp'
 import Notification from './components/Notification'
 import NavigationBar from './components/Navbar'
 
@@ -138,22 +137,23 @@ const App = () => {
     const newBalance =
       Math.round((balance + transactionToDelete.amount * -1) * 100) / 100
 
-    transactionService
-      .deleteTransaction(event.target.value)
-      .then(() => {
-        setTransactions(
-          transactions.filter((n) => n.id !== event.target.value)
-        )
-        setBalance(newBalance)
-        makeForecast(newBalance, user.allowance, setForecasts)
-      })
+    transactionService.deleteTransaction(event.target.value).then(() => {
+      setTransactions(transactions.filter((n) => n.id !== event.target.value))
+      setBalance(newBalance)
+      makeForecast(newBalance, user.allowance, setForecasts)
+    })
   }
 
   return (
     <Router>
-      <NavigationBar user={user} setForecasts={setForecasts}/>
+      <NavigationBar user={user} setForecasts={setForecasts} />
       <Routes>
-        <Route path="/signup" element={user ? <Navigate to="/" /> : <SignUp handleLogin={handleLogin} />}/>
+        <Route
+          path="/signup"
+          element={
+            user ? <Navigate to="/" /> : <SignUp handleLogin={handleLogin} />
+          }
+        />
         <Route
           path="/"
           element={
@@ -161,7 +161,9 @@ const App = () => {
               <div className="mainPage">
                 <Balance amount={balance} />
                 <div className="forecast">
-                  {forecasts ?<Forecast info={forecasts} className="forecast" />: null}
+                  {forecasts ? (
+                    <Forecast info={forecasts} className="forecast" />
+                  ) : null}
                 </div>
                 <div>
                   <button onClick={newIncomeButton}>+</button>
@@ -197,9 +199,7 @@ const App = () => {
             ) : (
               <div>
                 <Notification notification={notification} />
-                <Login
-                  handleLogin={handleLogin}
-                />
+                <Login handleLogin={handleLogin} />
               </div>
             )
           }

@@ -4,7 +4,12 @@ import makeForecast from '../utils/forecasting'
 import { BsFillPencilFill, BsCheck2 } from 'react-icons/bs'
 import { BiLogOut } from 'react-icons/bi'
 
-const SettingsMenu = ({ user, editAllowance, setEditAllowance, setForecasts}) => {
+const SettingsMenu = ({
+  user,
+  editAllowance,
+  setEditAllowance,
+  setForecasts,
+}) => {
   const [newAllowance, setNewAllowance] = useState(user.allowance)
 
   const handleAllowanceChange = (event) => {
@@ -40,6 +45,7 @@ const SettingsMenu = ({ user, editAllowance, setEditAllowance, setForecasts}) =>
         value={newAllowance}
         onChange={handleAllowanceChange}
         type="number"
+        min="0"
       />{' '}
       <button type="submit">
         <BsCheck2 />

@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom'
 import Notification from './Notification'
 import AllowanceSetUp from './AllowanceSetUp'
 
-
-const SignUp = ({handleLogin}) => {
+const SignUp = ({ handleLogin }) => {
   window.localStorage.clear()
 
   const [username, setUsername] = useState('')
@@ -27,37 +26,50 @@ const SignUp = ({handleLogin}) => {
       username,
       name,
       password,
-      allowance
+      allowance,
     }
 
     const makeUser = async () => {
-      try{
+      try {
         await userService.create(newUser)
 
         await handleLogin(username, password)
-
-
-
       } catch (error) {
-        setNotification(error.response.data.error)
+        const errorMessage = error.response.data.error
+        if (
+          errorMessage.includes('missing') ||
+          errorMessage.includes('username')
+        ) {
+          setDetailsComplete(false)
+          setUsername('')
+          setName('')
+          setPassword('')
+        }
+        setNotification(errorMessage)
         setTimeout(() => setNotification(false), 5000)
-        setUsername('')
-        setName('')
-        setPassword('')
       }
     }
 
     makeUser()
   }
 
-  if (detailsComplete){
-    return <AllowanceSetUp allowance={allowance} setAllowance={setAllowance} handleSignUp = {handleSignUp}/>
+  if (detailsComplete) {
+    return (
+      <>
+        <Notification notification={notification} />
+        <AllowanceSetUp
+          allowance={allowance}
+          setAllowance={setAllowance}
+          handleSignUp={handleSignUp}
+        />
+      </>
+    )
   }
 
   return (
     <div className="signupPage">
       <h2> Sign up</h2>
-      <Notification notification = {notification} />
+      <Notification notification={notification} />
       <form onSubmit={handleNext}>
         <div>
           <input
@@ -87,10 +99,10 @@ const SignUp = ({handleLogin}) => {
         <button type="submit">next</button>
       </form>
       <div>
-          Already have an account? <Link to="/login">login</Link>
+        Already have an account? <Link to="/login">login</Link>
       </div>
     </div>
   )
 }
 
-export  { SignUp }
+export { SignUp }
