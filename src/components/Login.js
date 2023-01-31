@@ -1,20 +1,19 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import {useState} from "react"
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Login = ({
   handleLogin
 }) => {
-const [username, setUsername] = useState("")
-const [password, setPassword] = useState("")
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
-const doLogin = async (event) => {
-  event.preventDefault()
-  await handleLogin(username, password)
+  const doLogin = async (event) => {
+    event.preventDefault()
+    await handleLogin(username, password)
 
-  setUsername("")
-  setPassword("")
-}
+    setUsername('')
+    setPassword('')
+  }
   return (
     <div className="loginPage">
       <h2> Sign in </h2>
@@ -40,10 +39,10 @@ const doLogin = async (event) => {
         <button type="submit">login</button>
       </form>
       <div>
-        Don't have an account? <Link to="/signup">Sign up</Link>
+        Don&apos;t have an account? <Link to="/signup">Sign up</Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

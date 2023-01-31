@@ -1,11 +1,11 @@
 const Transaction = ({ transaction, handleDelete }) => {
   let styling = {
-    color: "red",
-  };
-  if (transaction.amount > 0) {
-    styling.color = "green";
+    color: 'red',
   }
-  const date = new Date(transaction.date).toDateString();
+  if (transaction.amount > 0) {
+    styling.color = 'green'
+  }
+  const date = new Date(transaction.date).toDateString()
 
   return (
     <tr>
@@ -19,12 +19,12 @@ const Transaction = ({ transaction, handleDelete }) => {
       <td style={styling}>£{transaction.amount}</td>
       <td>£{transaction.balanceRemaining}</td>
     </tr>
-  );
-};
+  )
+}
 
 const TransactionTable = ({ transactions, handleDelete }) => {
   if (transactions.length === 0) {
-    return <p>Click buttons above to add income or expenses</p>;
+    return <p>Click buttons above to add income or expenses</p>
   }
   return (
     <table className="table table-striped">
@@ -47,7 +47,7 @@ const TransactionTable = ({ transactions, handleDelete }) => {
         ))}
       </tbody>
     </table>
-  );
-};
+  )
+}
 
-export default TransactionTable;
+export default TransactionTable

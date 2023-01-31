@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-import Collapse from "react-bootstrap/Collapse";
-import { BsGear } from "react-icons/bs";
+import Collapse from 'react-bootstrap/Collapse'
+import { BsGear } from 'react-icons/bs'
 
-import SettingsMenu from "./SettingsMenu";
+import SettingsMenu from './SettingsMenu'
 
 const Settings = ({ user, setForecasts }) => {
-  const [open, setOpen] = useState(false);
-  const [editAllowance, setEditAllowance] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [editAllowance, setEditAllowance] = useState(false)
 
   return (
     <>
       <BsGear
         onClick={() => {
-          setOpen(!open);
+          setOpen(!open)
           if (editAllowance) {
-            setEditAllowance(false);
+            setEditAllowance(false)
           }
         }}
       />
@@ -30,7 +30,7 @@ const Settings = ({ user, setForecasts }) => {
         </div>
       </Collapse>
     </>
-  );
-};
+  )
+}
 
-export default Settings;
+export default Settings

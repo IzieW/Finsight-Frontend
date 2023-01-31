@@ -6,11 +6,11 @@ import {
   Title,
   Tooltip,
   Legend,
-} from "chart.js";
+} from 'chart.js'
 
-import ChartDataLabels from "chartjs-plugin-datalabels";
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 
-import { Bar } from "react-chartjs-2";
+import { Bar } from 'react-chartjs-2'
 
 ChartJS.register(
   CategoryScale,
@@ -20,7 +20,7 @@ ChartJS.register(
   Tooltip,
   Legend,
   ChartDataLabels
-);
+)
 
 const Forecast = ({ info }) => {
   const options = {
@@ -31,13 +31,13 @@ const Forecast = ({ info }) => {
       },
       datalabels: {
         display: true,
-        color: "black",
-        anchor: "end",
+        color: 'black',
+        anchor: 'end',
         offset: -20,
-        align: "start",
-        formatter: (value, context) => {
-          const rounded = Math.round(value * 100) / 100;
-          return `£${rounded}`;
+        align: 'start',
+        formatter: (value) => {
+          const rounded = Math.round(value * 100) / 100
+          return `£${rounded}`
         },
       },
     },
@@ -63,28 +63,28 @@ const Forecast = ({ info }) => {
         bottom: 30,
       },
     },
-  };
+  }
 
   const newData = {
     labels: info.labels,
     datasets: [
       {
-        label: "",
+        label: '',
         data: info.values,
         backgroundColor: info.values.map((i) => {
           if (i > 0) {
-            return "rgb(138, 160, 84, 0.75)";
+            return 'rgb(138, 160, 84, 0.75)'
           }
-          return "rgb(220, 24, 93, 0.75)";
+          return 'rgb(220, 24, 93, 0.75)'
         }),
       },
     ],
-  };
+  }
   return (
     <div>
       <Bar options={options} data={newData} />
     </div>
-  );
-};
+  )
+}
 
-export default Forecast;
+export default Forecast

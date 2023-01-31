@@ -8,8 +8,8 @@ const TransactionForm = ({
 }) => {
   return (
     <form onSubmit={addTransaction}>
-      <p style={{ color: transactionType === "income" ? "green" : "red" }}>
-        New {transactionType === "income" ? "Income" : "Expense"}
+      <p style={{ color: transactionType === 'income' ? 'green' : 'red' }}>
+        New {transactionType === 'income' ? 'Income' : 'Expense'}
       </p>
       <input
         value={reference}
@@ -20,12 +20,12 @@ const TransactionForm = ({
         value={amount}
         onChange={handleAmount}
         type="number"
-        placeholder={transactionType === "income" ? "amount" : "cost"}
+        placeholder={transactionType === 'income' ? 'amount' : 'cost'}
         required
       />
       <button type="submit">add</button>
     </form>
-  );
-};
+  )
+}
 
-export default TransactionForm;
+export default TransactionForm
